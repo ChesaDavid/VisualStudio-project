@@ -1,15 +1,15 @@
 plugins {
-    alias(libs.plugins.androidApplication)
+    id("com.android.application") // Applying the Android application plugin directly
+    kotlin("android") version "1.5.31" // Applying Kotlin Android plugin
 }
 
 android {
-    namespace = "com.example.whatsnot"
-    compileSdk = 34
+    compileSdkVersion(34)
 
     defaultConfig {
         applicationId = "com.example.whatsnot"
-        minSdk = 24
-        targetSdk = 34
+        minSdkVersion(24)
+        targetSdkVersion(34)
         versionCode = 1
         versionName = "1.0"
 
@@ -17,11 +17,12 @@ android {
     }
 
     buildTypes {
-        release {
+        getByName("release") {
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
@@ -29,12 +30,11 @@ android {
 }
 
 dependencies {
-
-    implementation(libs.appcompat)
-    implementation(libs.material)
-    implementation(libs.activity)
-    implementation(libs.constraintlayout)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.ext.junit)
-    androidTestImplementation(libs.espresso.core)
+    implementation("androidx.appcompat:appcompat:1.4.0")
+    implementation("com.google.android.material:material:1.5.0")
+    implementation("androidx.activity:activity-ktx:1.4.0")
+    implementation("androidx.constraintlayout:constraintlayout:2.1.3")
+    testImplementation("junit:junit:4.13.2")
+    androidTestImplementation("androidx.test.ext:junit:1.1.3")
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
 }
